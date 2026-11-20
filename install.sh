@@ -265,15 +265,19 @@ step_obsidian() {
 }
 
 step_apps() {
-    step "App grid folders, favorites and the T3 icon"
+    step "App grid folders, favorites and custom icons"
     $HELP app-folders
     $HELP favorites
-    if [ -f /usr/share/applications/t3code.desktop ]; then
-        mkdir -p "$ICONS/hicolor/scalable/apps" "$HOME/.local/share/applications"
-        cp "$F/icons/t3code-catppuccin.svg" "$ICONS/hicolor/scalable/apps/"
-        sed 's/^Icon=.*/Icon=t3code-catppuccin/' /usr/share/applications/t3code.desktop > "$HOME/.local/share/applications/t3code.desktop"
-        ok "T3 icon"
-    fi
+    # our own icons for a few apps; the original .desktop files are left alone
+    mkdir -p "$ICONS/hicolor/scalable/apps" "$HOME/.local/share/applications"
+    local app icon
+    for pair in t3code:t3code-catppuccin org.wezfurlong.wezterm:wezterm-catppuccin; do
+        app="${pair%%:*}"; icon="${pair##*:}"
+        [ -f "/usr/share/applications/$app.desktop" ] || continue
+        cp "$F/icons/$icon.svg" "$ICONS/hicolor/scalable/apps/"
+        sed "s/^Icon=.*/Icon=$icon/" "/usr/share/applications/$app.desktop" > "$HOME/.local/share/applications/$app.desktop"
+        ok "$app icon"
+    done
 }
 
 STEPS=(backup fonts cursor theme icons extensions wallpaper terminal flatpak spotify obsidian apps)

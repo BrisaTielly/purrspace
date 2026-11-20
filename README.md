@@ -31,7 +31,7 @@
 | **Mocha everywhere** | Windows, top bar, menus, terminal, editor, Spotify, Obsidian, Telegram and lazygit share one palette. |
 | **A calmer top bar** | Solid `surface0` instead of whatever color the wallpaper has, a JetBrains Mono clock, stock status icons. |
 | **Mauve folders** | The full Papirus icon theme with Catppuccin Mocha folders. |
-| **A terminal that purrs** | WezTerm + tmux in Mocha, and fastfetch with a cat made of characters. |
+| **A terminal that purrs** | WezTerm + tmux in Mocha with its own slim traffic-light bar, and fastfetch with a cat made of characters. |
 | **A tidy app grid** | Apps sorted into folders (AI, Dev, Internet, Office, Media, Games, System, Utilities) and a short dock. |
 | **Gentle extras** | Blur, clipboard history and caffeine, plus Zorin's magic lamp and desktop cube. |
 
@@ -69,12 +69,12 @@ Run only some steps:
 | `theme` | Window and top bar theme, traffic lights, buttons on the right. |
 | `icons` | Papirus-Dark with mauve folders; stock icons in the top bar. |
 | `extensions` | User Themes, Blur my Shell, Clipboard Indicator, Caffeine. |
-| `wallpaper` | Downloads and sets *purple-horizon*. |
+| `wallpaper` | Sets *waves*, a Mocha wallpaper drawn by `scripts/make-wallpaper.py`. |
 | `terminal` | WezTerm, tmux, fastfetch, Neovim, lazygit and fzf. |
 | `flatpak` | Theme, traffic lights and cursor for Flatpak apps; one title bar for VS Code and Slack. |
 | `spotify` | Moves Spotify to a user Flatpak and applies Spicetify Catppuccin. |
 | `obsidian` | Catppuccin theme in every vault. |
-| `apps` | App grid folders, dock favorites and the T3 icon. |
+| `apps` | App grid folders, dock favorites, and Mocha icons for T3 and WezTerm. |
 
 ### The last few touches
 
@@ -112,6 +112,7 @@ Spotify updates can wash the theme away. Bring it back with `spicetify backup ap
 | App grid folders and dock favorites | `scripts/helpers.py` (`FOLDERS`, `favorites`) |
 | Terminal | `files/wezterm.lua`, `files/tmux.conf`, `files/fastfetch/` |
 | README images | `python3 scripts/make-readme-assets.py` redraws `docs/assets/` |
+| Wallpaper | `python3 scripts/make-wallpaper.py` redraws `files/wallpapers/waves.png` |
 
 <details>
   <summary><strong>Lessons already paid for</strong></summary>
@@ -132,17 +133,17 @@ Spotify updates can wash the theme away. Bring it back with `spicetify backup ap
   - **Grey, generic folders.** The Papirus install was incomplete (16 px only); the installer brings the whole theme.
   - **Spicetify won't patch the Snap Spotify.** Snap files are read-only; it has to be a `--user` Flatpak.
   - **Spotify "stuck" loading after theming.** The first launch is just slow. Wait.
+  - **WezTerm's title bar.** On Wayland WezTerm draws its own bar; on X11 GNOME draws one that ignores the theme. The fix is `INTEGRATED_BUTTONS` with the buttons drawn as `nf-fa-circle` glyphs (18px, close to the GTK dots).
   - **A different cursor in WezTerm.** On Wayland it doesn't inherit GNOME's: `config.xcursor_theme` in `wezterm.lua`.
   - **Installed an extension and it isn't there.** On Wayland it loads after logging out and back in.
 </details>
 
 ## Built on
 
-- The purrspace cat and the README illustrations are drawn in code by `scripts/make-readme-assets.py`
+- The purrspace cat, the wallpaper and the README illustrations are drawn in code (`scripts/`)
 - [neuromask/catppuccin-linux-theme](https://github.com/neuromask/catppuccin-linux-theme) (MIT) for the GNOME Shell and GTK theme, with purrspace tweaks
 - [Catppuccin](https://catppuccin.com/ports/) ports: Papirus folders, Spicetify, Obsidian, lazygit, fzf, Neovim
 - [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons and the [Bibata](https://github.com/ful1e5/Bibata_Cursor) cursor
-- Wallpaper from [orangci/walls-catppuccin-mocha](https://github.com/orangci/walls-catppuccin-mocha), downloaded at install time
 
 ---
 
