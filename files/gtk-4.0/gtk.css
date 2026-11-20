@@ -1,0 +1,39 @@
+@import url("catppuccin.css");
+
+/* purrspace: Catppuccin Mocha traffic-light buttons for GTK4/libadwaita apps.
+   The "window ... :not(...)" selectors are on purpose: they must outweigh
+   the rules in catppuccin.css for these to win. */
+
+window windowcontrols > button:not(.suggested-action):not(.destructive-action) {
+  min-width: 0;
+  min-height: 0;
+  padding: 0 5px;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+}
+
+window windowcontrols > button:not(.suggested-action):not(.destructive-action) > image {
+  min-width: 19px;
+  min-height: 19px;
+  padding: 0;
+  border-radius: 100%;
+  -gtk-icon-size: 12px;
+  color: transparent;
+  box-shadow: none;
+  transition: color 120ms ease, background-color 120ms ease;
+}
+
+window windowcontrols > button.close:not(.suggested-action):not(.destructive-action) > image    { background-color: #f38ba8; }
+window windowcontrols > button.minimize:not(.suggested-action):not(.destructive-action) > image { background-color: #f9e2af; }
+window windowcontrols > button.maximize:not(.suggested-action):not(.destructive-action) > image { background-color: #a6e3a1; }
+
+/* the symbol shows up on hover */
+window windowcontrols:hover > button:not(.suggested-action):not(.destructive-action) > image { color: #1e1e2e; }
+window windowcontrols > button:active:not(.suggested-action):not(.destructive-action) > image { box-shadow: inset 0 0 0 9999px rgba(30, 30, 46, 0.25); }
+
+/* unfocused window: Mocha surface1 dots */
+window windowcontrols:backdrop > button:not(.suggested-action):not(.destructive-action) > image { background-color: #45475a; }
+window windowcontrols:backdrop:hover > button.close:not(.suggested-action):not(.destructive-action) > image    { background-color: #f38ba8; }
+window windowcontrols:backdrop:hover > button.minimize:not(.suggested-action):not(.destructive-action) > image { background-color: #f9e2af; }
+window windowcontrols:backdrop:hover > button.maximize:not(.suggested-action):not(.destructive-action) > image { background-color: #a6e3a1; }

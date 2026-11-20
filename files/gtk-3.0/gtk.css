@@ -1,0 +1,48 @@
+/* purrspace: Catppuccin Mocha traffic-light buttons for GTK3 apps and for
+   apps that only use GTK3 to draw their title bar (Chrome, VS Code, Slack).
+   The dot is a radial-gradient instead of the button background because
+   Chrome/Electron ignore the CSS size and draw a big button; this way the
+   dot is ~70% of the button whatever its size.
+   Selectors start with "window headerbar" to outweigh the theme. */
+
+window headerbar button.titlebutton:not(.suggested-action):not(.destructive-action),
+window .titlebar button.titlebutton:not(.suggested-action):not(.destructive-action) {
+  min-width: 16px;
+  min-height: 16px;
+  padding: 0;
+  margin: 0 3px;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  color: transparent;
+  -gtk-icon-shadow: none;
+  -gtk-icon-transform: scale(0.55);
+}
+
+window headerbar button.titlebutton.close:not(.suggested-action):not(.destructive-action),
+window .titlebar button.titlebutton.close:not(.suggested-action):not(.destructive-action) {
+  background-image: radial-gradient(circle closest-side, #f38ba8 68%, transparent 74%);
+}
+window headerbar button.titlebutton.minimize:not(.suggested-action):not(.destructive-action),
+window .titlebar button.titlebutton.minimize:not(.suggested-action):not(.destructive-action) {
+  background-image: radial-gradient(circle closest-side, #f9e2af 68%, transparent 74%);
+}
+window headerbar button.titlebutton.maximize:not(.suggested-action):not(.destructive-action),
+window .titlebar button.titlebutton.maximize:not(.suggested-action):not(.destructive-action) {
+  background-image: radial-gradient(circle closest-side, #a6e3a1 68%, transparent 74%);
+}
+
+window headerbar button.titlebutton:hover:not(.suggested-action):not(.destructive-action),
+window .titlebar button.titlebutton:hover:not(.suggested-action):not(.destructive-action) {
+  color: #1e1e2e;
+}
+
+/* unfocused window: Mocha surface1 dots */
+window headerbar button.titlebutton:backdrop:not(.suggested-action):not(.destructive-action),
+window .titlebar button.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
+  background-color: transparent;
+  background-image: radial-gradient(circle closest-side, #45475a 68%, transparent 74%);
+}
