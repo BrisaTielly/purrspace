@@ -56,6 +56,11 @@ step_cursor() {
         fetch https://github.com/ful1e5/Bibata_Cursor/releases/latest/download/Bibata-Modern-Ice.tar.xz "$TMP/bibata.tar.xz" || return 1
         mkdir -p "$ICONS" && tar -xJf "$TMP/bibata.tar.xz" -C "$ICONS" || return 1
     fi
+    # GNOME Shell and X11 apps look for cursors in ~/.icons, and the system
+    # "default" cursor theme points at Adwaita, so point both at Bibata
+    mkdir -p "$HOME/.icons/default"
+    ln -sfn "$ICONS/Bibata-Modern-Ice" "$HOME/.icons/Bibata-Modern-Ice"
+    printf '[Icon Theme]\nName=Default\nInherits=Bibata-Modern-Ice\n' > "$HOME/.icons/default/index.theme"
     gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'
     gsettings set org.gnome.desktop.interface cursor-size 24
     ok "applied"
@@ -109,6 +114,7 @@ EXTENSIONS=(
     blur-my-shell@aunetx
     clipboard-indicator@tudmotu.com
     caffeine@patapon.info
+    rounded-window-corners@fxgn
 )
 # These ship with Zorin OS; other distros just skip them
 EXTENSIONS_ZORIN=(
@@ -268,16 +274,27 @@ step_apps() {
     step "App grid folders, favorites and custom icons"
     $HELP app-folders
     $HELP favorites
-    # our own icons for a few apps; the original .desktop files are left alone
+    # Mocha icons for the dock apps. A copy of each .desktop file goes to
+    # ~/.local/share/applications with a new Icon=; the originals stay untouched.
     mkdir -p "$ICONS/hicolor/scalable/apps" "$HOME/.local/share/applications"
-    local app icon
-    for pair in t3code:t3code-catppuccin org.wezfurlong.wezterm:wezterm-catppuccin; do
-        app="${pair%%:*}"; icon="${pair##*:}"
-        [ -f "/usr/share/applications/$app.desktop" ] || continue
+    local dirs=("$HOME/.local/share/applications" "$HOME/.local/share/flatpak/exports/share/applications"
+                /var/lib/flatpak/exports/share/applications /usr/share/applications)
+    local pair pattern icon src d f
+    for pair in 'com.google.Chrome:chrome' 'com.visualstudio.code:vscode' 'com.slack.Slack:slack' \
+                'org.wezfurlong.wezterm:wezterm' 'org.gnome.Nautilus:files' 'agentes.chat:agentes' \
+                't3code:t3' 'org.telegram.desktop*:telegram' 'com.spotify.Client:spotify'; do
+        pattern="${pair%%:*}"; icon="purr-${pair##*:}"; src=""
+        for d in "${dirs[@]}"; do
+            for f in "$d"/$pattern.desktop; do [ -f "$f" ] && { src="$f"; break 2; }; done
+        done
+        [ -n "$src" ] || continue
         cp "$F/icons/$icon.svg" "$ICONS/hicolor/scalable/apps/"
-        sed "s/^Icon=.*/Icon=$icon/" "/usr/share/applications/$app.desktop" > "$HOME/.local/share/applications/$app.desktop"
-        ok "$app icon"
+        local dest="$HOME/.local/share/applications/$(basename "$src")"
+        [ "$src" = "$dest" ] && keep "$src"
+        sed "s/^Icon=.*/Icon=$icon/" "$src" > "$dest.tmp" && mv "$dest.tmp" "$dest"
+        ok "$(basename "$src" .desktop) icon"
     done
+    update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
 }
 
 STEPS=(backup fonts cursor theme icons extensions wallpaper terminal flatpak spotify obsidian apps)

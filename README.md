@@ -33,6 +33,7 @@
 | **Mauve folders** | The full Papirus icon theme with Catppuccin Mocha folders. |
 | **A terminal that purrs** | WezTerm + tmux in Mocha with its own slim traffic-light bar, and fastfetch with a cat made of characters. |
 | **A tidy app grid** | Apps sorted into folders (AI, Dev, Internet, Office, Media, Games, System, Utilities) and a short dock. |
+| **Round everywhere** | Every window gets four rounded corners, even the ones Chrome and Electron leave square at the bottom. |
 | **Gentle extras** | Blur, clipboard history and caffeine, plus Zorin's magic lamp and desktop cube. |
 
 <table align="center">
@@ -68,13 +69,13 @@ Run only some steps:
 | `cursor` | Bibata Modern Ice. |
 | `theme` | Window and top bar theme, traffic lights, buttons on the right. |
 | `icons` | Papirus-Dark with mauve folders; stock icons in the top bar. |
-| `extensions` | User Themes, Blur my Shell, Clipboard Indicator, Caffeine. |
+| `extensions` | User Themes, Blur my Shell, Clipboard Indicator, Caffeine, Rounded Window Corners. |
 | `wallpaper` | Sets *waves*, a Mocha wallpaper drawn by `scripts/make-wallpaper.py`. |
 | `terminal` | WezTerm, tmux, fastfetch, Neovim, lazygit and fzf. |
 | `flatpak` | Theme, traffic lights and cursor for Flatpak apps; one title bar for VS Code and Slack. |
 | `spotify` | Moves Spotify to a user Flatpak and applies Spicetify Catppuccin. |
 | `obsidian` | Catppuccin theme in every vault. |
-| `apps` | App grid folders, dock favorites, and Mocha icons for T3 and WezTerm. |
+| `apps` | App grid folders, dock favorites, and Mocha icons for the dock apps. |
 
 ### The last few touches
 
@@ -134,6 +135,7 @@ Spotify updates can wash the theme away. Bring it back with `spicetify backup ap
   - **Spicetify won't patch the Snap Spotify.** Snap files are read-only; it has to be a `--user` Flatpak.
   - **Spotify "stuck" loading after theming.** The first launch is just slow. Wait.
   - **WezTerm's title bar.** On Wayland WezTerm draws its own bar; on X11 GNOME draws one that ignores the theme. The fix is `INTEGRATED_BUTTONS` with the buttons drawn as `nf-fa-circle` glyphs (18px, close to the GTK dots).
+  - **Default arrow over the dock and top bar.** GNOME Shell and X11 apps look in `~/.icons` and at the system `default` cursor theme (Adwaita). The `cursor` step links Bibata there.
   - **A different cursor in WezTerm.** On Wayland it doesn't inherit GNOME's: `config.xcursor_theme` in `wezterm.lua`.
   - **Installed an extension and it isn't there.** On Wayland it loads after logging out and back in.
 </details>
