@@ -69,7 +69,7 @@ def papirus_panel(*themes):
             m = re.match(r"^(Directories|ScaledDirectories)=(.*)$", line)
             if m:
                 ds = [d for d in m.group(2).split(",")
-                      if d and not re.search(r"/(panel|symbolic/status)$", d)]
+                      if d and not re.search(r"/(panel|symbolic[^/]*/status)$", d)]
                 line = f"{m.group(1)}={','.join(ds)}"
             out.append(line)
         open(p, "w").write("\n".join(out))

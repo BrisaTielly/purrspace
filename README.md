@@ -33,7 +33,7 @@
 | **Mauve folders** | The full Papirus icon theme with Catppuccin Mocha folders. |
 | **A terminal that purrs** | WezTerm + tmux in Mocha, and fastfetch with a cat made of characters. |
 | **A tidy app grid** | Apps sorted into folders (AI, Dev, Internet, Office, Media, Games, System, Utilities) and a short dock. |
-| **Gentle extras** | Blur, window effects, clipboard history, system monitor and caffeine, plus Zorin's magic lamp and desktop cube. |
+| **Gentle extras** | Blur, clipboard history and caffeine, plus Zorin's magic lamp and desktop cube. |
 
 <table align="center">
   <tr>
@@ -68,7 +68,7 @@ Run only some steps:
 | `cursor` | Bibata Modern Ice. |
 | `theme` | Window and top bar theme, traffic lights, buttons on the right. |
 | `icons` | Papirus-Dark with mauve folders; stock icons in the top bar. |
-| `extensions` | User Themes, Blur my Shell, Burn My Windows, Clipboard Indicator, Vitals, Caffeine. |
+| `extensions` | User Themes, Blur my Shell, Clipboard Indicator, Caffeine. |
 | `wallpaper` | Downloads and sets *purple-horizon*. |
 | `terminal` | WezTerm, tmux, fastfetch, Neovim, lazygit and fzf. |
 | `flatpak` | Theme, traffic lights and cursor for Flatpak apps; one title bar for VS Code and Slack. |

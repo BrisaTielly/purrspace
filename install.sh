@@ -107,9 +107,7 @@ step_icons() {
 EXTENSIONS=(
     user-theme@gnome-shell-extensions.gcampax.github.com
     blur-my-shell@aunetx
-    burn-my-windows@schneegans.github.com
     clipboard-indicator@tudmotu.com
-    Vitals@CoreCoding.com
     caffeine@patapon.info
 )
 # These ship with Zorin OS; other distros just skip them
