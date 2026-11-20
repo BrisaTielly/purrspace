@@ -143,11 +143,11 @@ EOF
 }
 
 step_wallpaper() {
-    step "Wallpaper: purple-horizon"
-    local pics; pics="$(xdg-user-dir PICTURES 2>/dev/null || echo "$HOME/Pictures")/Wallpapers/catppuccin"
-    mkdir -p "$pics"
-    local w="$pics/purple-horizon.jpg"
-    [ -f "$w" ] || fetch https://raw.githubusercontent.com/orangci/walls-catppuccin-mocha/master/purple-horizon.jpg "$w" || return 1
+    step "Wallpaper: waves"
+    # drawn by scripts/make-wallpaper.py, so it ships with the repo
+    local pics; pics="$(xdg-user-dir PICTURES 2>/dev/null || echo "$HOME/Pictures")/Wallpapers/purrspace"
+    mkdir -p "$pics" && cp "$F/wallpapers/waves.png" "$pics/waves.png"
+    local w="$pics/waves.png"
     for k in picture-uri picture-uri-dark; do gsettings set org.gnome.desktop.background "$k" "file://$w"; done
     gsettings set org.gnome.desktop.background picture-options 'zoom'
     gsettings set org.gnome.desktop.screensaver picture-uri "file://$w"
