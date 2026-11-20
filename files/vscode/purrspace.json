@@ -1,0 +1,6 @@
+{
+    "window.titleBarStyle": "native",
+    "window.customTitleBarVisibility": "never",
+    "window.menuBarVisibility": "toggle",
+    "workbench.colorTheme": "Catppuccin Mocha"
+}
