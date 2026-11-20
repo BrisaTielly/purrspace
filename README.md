@@ -133,6 +133,7 @@ Spotify updates can wash the theme away. Bring it back with `spicetify backup ap
   - **Chrome went light in GTK mode.** The Flatpak needed `gtk-application-prefer-dark-theme=1` in its own `settings.ini`.
   - **Grey, generic folders.** The Papirus install was incomplete (16 px only); the installer brings the whole theme.
   - **Spicetify won't patch the Snap Spotify.** Snap files are read-only; it has to be a `--user` Flatpak.
+  - **A blue, unthemed Spotify title bar.** The Flatpak runs on X11 by default. `spotify-flags.conf` switches it to Wayland with `WaylandWindowDecorations`, so GTK draws the bar.
   - **Spotify "stuck" loading after theming.** The first launch is just slow. Wait.
   - **WezTerm's title bar.** On Wayland WezTerm draws its own bar; on X11 GNOME draws one that ignores the theme. The fix is `INTEGRATED_BUTTONS` with the buttons drawn as `nf-fa-circle` glyphs (18px, close to the GTK dots).
   - **Default arrow over the dock and top bar.** GNOME Shell and X11 apps look in `~/.icons` and at the system `default` cursor theme (Adwaita). The `cursor` step links Bibata there.

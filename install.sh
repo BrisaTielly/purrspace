@@ -234,6 +234,11 @@ step_spotify() {
     flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     flatpak info --user com.spotify.Client >/dev/null 2>&1 \
         || flatpak install --user -y --noninteractive flathub com.spotify.Client || return 1
+    # Wayland with GTK-drawn decorations: the title bar gets the traffic lights.
+    # (On X11 GNOME draws an unthemed bar.) The Flatpak launcher reads this file.
+    local cfg="$HOME/.var/app/com.spotify.Client/config"
+    mkdir -p "$cfg"
+    printf '%s\n' '--enable-features=UseOzonePlatform,WaylandWindowDecorations' '--ozone-platform=wayland' > "$cfg/spotify-flags.conf"
     local prefs="$HOME/.var/app/com.spotify.Client/config/spotify/prefs"
     if [ ! -f "$prefs" ]; then
         (flatpak run --user com.spotify.Client >/dev/null 2>&1 &)
@@ -254,6 +259,13 @@ step_spotify() {
         prefs_path "$prefs" current_theme catppuccin color_scheme mocha \
         inject_css 1 inject_theme_js 1 replace_colors 1 overwrite_assets 1 >/dev/null
     "$sp" backup apply >/dev/null 2>&1 || "$sp" apply >/dev/null 2>&1 || return 1
+    # Spotify was installed after the flatpak step ran, so link the GTK files for it too
+    for v in 3.0 4.0; do
+        mkdir -p "$cfg/gtk-$v"; ln -sfn "$HOME/.config/gtk-$v/gtk.css" "$cfg/gtk-$v/gtk.css"
+        printf '[Settings]\ngtk-theme-name=Catppuccin-GnomeTheme\ngtk-application-prefer-dark-theme=1\n' > "$cfg/gtk-$v/settings.ini"
+    done
+    ln -sfn "$HOME/.config/gtk-4.0/catppuccin.css" "$cfg/gtk-4.0/catppuccin.css"
+    ln -sfn "$HOME/.config/gtk-4.0/assets" "$cfg/gtk-4.0/assets"
     ok "Spotify in Catppuccin Mocha (the first launch is slow; a few seconds of loading is normal)"
 }
 
