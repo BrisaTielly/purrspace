@@ -86,6 +86,11 @@ step_theme() {
     gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com 2>/dev/null \
         || warn "User Themes extension not found; the 'extensions' step installs it"
     gsettings set org.gnome.shell.extensions.user-theme name 'Catppuccin-GnomeTheme' 2>/dev/null || true
+    # after every login: flip the theme so X11 title bars get it (see the script)
+    mkdir -p "$HOME/.local/bin" "$HOME/.config/autostart"
+    cp "$F/autostart/purrspace-refresh" "$HOME/.local/bin/"
+    printf '[Desktop Entry]\nType=Application\nName=purrspace refresh\nExec=%s\nNoDisplay=true\nX-GNOME-Autostart-enabled=true\n' \
+        "$HOME/.local/bin/purrspace-refresh" > "$HOME/.config/autostart/purrspace-refresh.desktop"
     ok "theme applied"
     # Files keeps running in the background and won't reread the CSS on its own
     nautilus -q 2>/dev/null || true
@@ -234,6 +239,13 @@ step_spotify() {
     flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     flatpak info --user com.spotify.Client >/dev/null 2>&1 \
         || flatpak install --user -y --noninteractive flathub com.spotify.Client || return 1
+    # Spotify defaults to Wayland and then draws its own blue title bar. On X11
+    # GNOME draws the bar with the theme, but the Flatpak only gets X11 when
+    # there is no Wayland (fallback-x11), so grant it explicitly.
+    local cfg="$HOME/.var/app/com.spotify.Client/config"
+    mkdir -p "$cfg"
+    printf '%s\n' '--ozone-platform=x11' > "$cfg/spotify-flags.conf"
+    flatpak override --user --nosocket=fallback-x11 --socket=x11 com.spotify.Client
     local prefs="$HOME/.var/app/com.spotify.Client/config/spotify/prefs"
     if [ ! -f "$prefs" ]; then
         (flatpak run --user com.spotify.Client >/dev/null 2>&1 &)

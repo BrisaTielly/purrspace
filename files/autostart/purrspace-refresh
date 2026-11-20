@@ -1,0 +1,14 @@
+#!/bin/sh
+# purrspace: runs right after login.
+# GNOME draws X11 app title bars (Spotify, for one) with a helper process that
+# only picks up the GTK theme when it changes live; at login it starts unthemed.
+# Flipping the theme away and back makes it load. Same trick for the icon cache.
+sleep 6
+theme=$(gsettings get org.gnome.desktop.interface gtk-theme)
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+sleep 1
+gsettings set org.gnome.desktop.interface gtk-theme "$theme"
+icons=$(gsettings get org.gnome.desktop.interface icon-theme)
+gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
+sleep 1
+gsettings set org.gnome.desktop.interface icon-theme "$icons"
