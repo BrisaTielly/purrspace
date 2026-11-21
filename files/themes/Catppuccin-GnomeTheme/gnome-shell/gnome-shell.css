@@ -2294,7 +2294,7 @@ https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/beb77f58243265a6cc62b720a5b0
 	border: 0 !important;
 	background-color: transparent !important;
 	margin-bottom: 0 !important;
-	padding: 14px 18px !important;
+	padding: 6px 18px 22px 18px !important; /* the box is sized before this applies and clips the bottom, so the text sits low; shift it up */
 	caret-color: #f5c2e7;
 	selection-background-color: #cba6f7;
 	selected-color: #1e1e2e;
