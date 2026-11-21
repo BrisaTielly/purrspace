@@ -124,6 +124,7 @@ EXTENSIONS=(
     clipboard-indicator@tudmotu.com
     caffeine@patapon.info
     rounded-window-corners@fxgn
+    search-light@icedman.github.com
 )
 # These ship with Zorin OS; other distros just skip them
 EXTENSIONS_ZORIN=(
@@ -157,6 +158,16 @@ EOF
     # Blur my Shell repaints menu toggles in GNOME blue unless told to keep the theme's look
     local bms="$HOME/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
     [ -d "$bms" ] && gsettings --schemadir "$bms" set org.gnome.shell.extensions.blur-my-shell.popup preserve-shell-theme true 2>/dev/null || true
+    # Search Light (Super+Space): a Spotlight-style search in Mocha
+    local sl="$HOME/.local/share/gnome-shell/extensions/search-light@icedman.github.com/schemas"
+    if [ -d "$sl" ]; then
+        local S="gsettings --schemadir $sl set org.gnome.shell.extensions.search-light"
+        # GNOME uses Super+Space to switch keyboard layouts; leave it only on the keyboard key
+        gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['XF86Keyboard']"
+        $S shortcut-search "['<Super>space']"; $S blur-background false; $S border-radius 20.0; $S border-thickness 1
+        $S background-color '(0.118, 0.118, 0.180, 0.97)'; $S border-color '(0.796, 0.651, 0.969, 0.45)'
+        $S text-color '(0.804, 0.839, 0.957, 1.0)'; $S entry-text-color '(0.804, 0.839, 0.957, 1.0)'
+    fi
     ok "extensions enabled (log out and back in to load them)"
 }
 

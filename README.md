@@ -69,13 +69,29 @@ Run only some steps:
 | `cursor` | Bibata Modern Ice. |
 | `theme` | Window and top bar theme, traffic lights, buttons on the right. |
 | `icons` | [mochicons](https://github.com/BrisaTielly/mochicons) app icons over Papirus-Dark with mauve folders; stock icons in the top bar. |
-| `extensions` | User Themes, Blur my Shell, Clipboard Indicator, Caffeine, Rounded Window Corners. |
+| `extensions` | User Themes, Blur my Shell, Clipboard Indicator, Caffeine, Rounded Window Corners, and Search Light on <kbd>Super</kbd>+<kbd>Space</kbd>. |
 | `wallpaper` | Sets *waves*, a Mocha wallpaper drawn by `scripts/make-wallpaper.py`. |
 | `terminal` | WezTerm, tmux, fastfetch, Neovim, lazygit and fzf. |
 | `flatpak` | Theme, traffic lights and cursor for Flatpak apps; one title bar for VS Code and Slack. |
 | `spotify` | Moves Spotify to a user Flatpak and applies Spicetify Catppuccin. |
 | `obsidian` | Catppuccin theme in every vault. |
 | `apps` | App grid folders, dock favorites, and Mocha icons for the dock apps. |
+
+### With a password
+
+`install.sh` never asks for one. These three live in a separate script:
+
+```bash
+sudo ./sudo-extras.sh            # or pick: login, boot, t3
+```
+
+| Step | What it does |
+|---|---|
+| `login` | The login screen in Mocha: Zorin's own theme recolored, *waves* in the background. |
+| `boot` | The [Catppuccin Mocha boot splash](https://github.com/catppuccin/plymouth). |
+| `t3` | Puts T3 Code on the system title bar and re-patches it after every update. |
+
+How to undo each one is at the top of the script.
 
 ### The last few touches
 
@@ -85,8 +101,7 @@ Some apps keep their settings out of reach, so these stay manual:
 2. **Chrome:** Settings → Appearance → Mode → **GTK**, then `chrome://restart`. GTK mode is what puts the dots in the tab strip.
 3. **VS Code:** install *Catppuccin for VSCode* (and *Catppuccin Icons*, if you like).
 4. **Telegram:** open <https://t.me/addtheme/ctp_mocha>.
-5. **T3 Code:** close it and run `sudo python3 scripts/t3-traffic-lights.py` so it uses the system title bar. Run it again after T3 updates.
-6. **Slack:** Preferences → Appearance → custom theme: sidebar `#181825`, selected `#cba6f7`, highlights `#f5c2e7`, text `#cdd6f4`.
+5. **Slack:** Preferences → Appearance → custom theme: sidebar `#181825`, selected `#cba6f7`, highlights `#f5c2e7`, text `#cdd6f4`.
 
 Spotify updates can wash the theme away. Bring it back with `spicetify backup apply`.
 
@@ -139,6 +154,8 @@ Spotify updates can wash the theme away. Bring it back with `spicetify backup ap
   - **Blue quick settings toggles.** Blur my Shell restyles popup controls with GNOME's blue accent and `!important`. Its `preserve-shell-theme` option leaves them to the theme.
   - **Top bar icons only clicked dead center.** The theme gave panel buttons a 4px vertical margin, dead space at the screen edge. A transparent border of the same size keeps the pill look and catches the click.
   - **T3 Code draws its own grey buttons.** Electron's `titleBarOverlay` can't be themed; `scripts/t3-traffic-lights.py` renames it in `app.asar` so T3 falls back to the system bar.
+  - **Search Light looked see-through and double-outlined.** Its own blur didn't take, and the theme's entry focus ring drew a second box inside. Solid `base` background and a theme rule that drops the ring.
+  - **Super+Space did nothing.** GNOME uses it to switch keyboard layouts; that moves to the keyboard key only.
   - **Spotify "stuck" loading after theming.** The first launch is just slow. Wait.
   - **WezTerm's title bar.** On Wayland WezTerm draws its own bar; on X11 GNOME draws one that ignores the theme. The fix is `INTEGRATED_BUTTONS` with the buttons drawn as `nf-fa-circle` glyphs (18px, close to the GTK dots).
   - **Default arrow over the dock and top bar.** GNOME Shell and X11 apps look in `~/.icons` and at the system `default` cursor theme (Adwaita). The `cursor` step links Bibata there.

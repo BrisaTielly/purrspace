@@ -2284,3 +2284,21 @@ https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/beb77f58243265a6cc62b720a5b0
 	border-left-width: 0 !important;
 	border-right-width: 0 !important;
 }
+
+/* Search Light (Super+Space): the theme's entry focus ring drew a second,
+   misaligned outline inside the box; leave the box border alone */
+#searchLightBox > StEntry,
+#searchLightBox > StEntry:focus,
+#searchLightBox > StEntry:hover {
+	box-shadow: none !important;
+	border: 0 !important;
+	background-color: transparent !important;
+	margin-bottom: 0 !important;
+	padding: 14px 18px !important;
+	caret-color: #f5c2e7;
+	selection-background-color: #cba6f7;
+	selected-color: #1e1e2e;
+}
+#searchLightBox StLabel.hint-text { color: #6c7086; }
+#searchLight .overview-tile:selected,
+#searchLight .list-search-result:selected { background-color: rgba(203, 166, 247, 0.25); }
