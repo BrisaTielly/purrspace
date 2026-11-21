@@ -2241,26 +2241,46 @@ https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/beb77f58243265a6cc62b720a5b0
 	color: rgba(233, 242, 250, 1);
 }
 
-/* quick settings: mauve accent for toggles and sliders (GNOME 46 overrides the
-   theme rules with its blue, so these selectors are more specific) */
-.quick-settings .quick-toggle:checked,
-.quick-settings .quick-menu-toggle .quick-toggle:checked,
-.quick-settings .quick-menu-toggle .quick-toggle-arrow:checked,
-.quick-settings .quick-toggle-has-menu .quick-toggle:checked,
-.quick-settings .quick-toggle-has-menu .quick-toggle-menu-button:checked,
-.quick-settings .quick-toggle:checked:hover,
-.quick-settings .quick-menu-toggle .quick-toggle:checked:hover,
-.quick-settings .quick-menu-toggle .quick-toggle-arrow:checked:hover,
-.quick-settings .quick-toggle-has-menu .quick-toggle:checked:hover,
-.quick-settings .quick-toggle-has-menu .quick-toggle-menu-button:checked:hover {
-	color: #1e1e2e;
-	background-color: #cba6f7;
+/* quick settings: mauve accent for toggles and sliders. Blur my Shell restyles
+   the popups with the blue GNOME accent and !important, loading after the
+   theme, so these selectors go one level deeper (.quick-settings-grid). */
+.quick-settings .quick-settings-grid .quick-toggle:checked,
+.quick-settings .quick-settings-grid .quick-menu-toggle .quick-toggle:checked,
+.quick-settings .quick-settings-grid .quick-menu-toggle .quick-toggle-arrow:checked,
+.quick-settings .quick-settings-grid .quick-toggle-has-menu .quick-toggle:checked,
+.quick-settings .quick-settings-grid .quick-toggle-has-menu .quick-toggle-menu-button:checked,
+.quick-settings .quick-settings-grid .quick-toggle:checked:focus,
+.quick-settings .quick-settings-grid .quick-toggle:checked:active,
+.quick-settings .quick-settings-grid .quick-menu-toggle .quick-toggle:checked:focus,
+.quick-settings .quick-settings-grid .quick-menu-toggle .quick-toggle:checked:active,
+.quick-settings .quick-settings-grid .quick-menu-toggle .quick-toggle-arrow:checked:focus,
+.quick-settings .quick-settings-grid .quick-menu-toggle .quick-toggle-arrow:checked:active,
+.quick-settings .quick-settings-grid .quick-toggle-has-menu .quick-toggle:checked:focus,
+.quick-settings .quick-settings-grid .quick-toggle-has-menu .quick-toggle:checked:active,
+.quick-settings .quick-settings-grid .quick-toggle-has-menu .quick-toggle-menu-button:checked:focus,
+.quick-settings .quick-settings-grid .quick-toggle-has-menu .quick-toggle-menu-button:checked:active {
+	color: #1e1e2e !important;
+	background-color: #cba6f7 !important;
 	border-color: transparent;
 }
-.quick-settings .quick-toggle:checked:hover,
-.quick-settings .quick-toggle-has-menu .quick-toggle-menu-button:checked:hover {
-	background-color: #d6bbf9;
+.quick-settings .quick-settings-grid .quick-toggle:checked:hover,
+.quick-settings .quick-settings-grid .quick-menu-toggle .quick-toggle:checked:hover,
+.quick-settings .quick-settings-grid .quick-menu-toggle .quick-toggle-arrow:checked:hover,
+.quick-settings .quick-settings-grid .quick-toggle-has-menu .quick-toggle:checked:hover,
+.quick-settings .quick-settings-grid .quick-toggle-has-menu .quick-toggle-menu-button:checked:hover {
+	color: #1e1e2e !important;
+	background-color: #d6bbf9 !important;
 }
 .slider, .level, .quick-settings .slider {
 	-barlevel-active-background-color: #cba6f7;
+}
+
+/* top bar: clickable all the way to the screen edge. The theme used a 4px
+   vertical margin, which is dead space; a transparent border keeps the pill
+   the same size but belongs to the button, so clicks there count. */
+#panel .panel-button {
+	margin: 0 3px;
+	border: 4px solid transparent !important;
+	border-left-width: 0 !important;
+	border-right-width: 0 !important;
 }

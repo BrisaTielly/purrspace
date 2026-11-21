@@ -150,6 +150,9 @@ for u in sys.argv[1:]:
 subprocess.run(['gsettings','set','org.gnome.shell','enabled-extensions',str(cur)],check=True)
 EOF
     gsettings set org.gnome.shell.extensions.user-theme name 'Catppuccin-GnomeTheme' 2>/dev/null || true
+    # Blur my Shell repaints menu toggles in GNOME blue unless told to keep the theme's look
+    local bms="$HOME/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
+    [ -d "$bms" ] && gsettings --schemadir "$bms" set org.gnome.shell.extensions.blur-my-shell.popup preserve-shell-theme true 2>/dev/null || true
     ok "extensions enabled (log out and back in to load them)"
 }
 
