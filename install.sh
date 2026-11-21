@@ -325,6 +325,11 @@ step_apps() {
         sed "s/^Icon=.*/Icon=$icon/" "$src" > "$dest.tmp" && mv "$dest.tmp" "$dest"
         ok "$(basename "$src" .desktop) icon"
     done
+    # T3's window calls itself com.t3tools.T3Code and T3 writes a hidden launcher by that name with
+    # its own PNG, so the open window showed up apart from the pinned one with the stock icon.
+    local apps="$HOME/.local/share/applications"
+    [ -f "$apps/t3code.desktop" ] && sed -i 's/^StartupWMClass=.*/StartupWMClass=com.t3tools.T3Code/' "$apps/t3code.desktop"
+    [ -f "$apps/com.t3tools.T3Code.desktop" ] && sed -i 's/^Icon=.*/Icon=purr-t3/' "$apps/com.t3tools.T3Code.desktop"
     update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
 }
 
