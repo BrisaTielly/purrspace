@@ -111,6 +111,10 @@ step_icons() {
     $HELP papirus-panel "$ICONS/Papirus" "$ICONS/Papirus-Dark"
     for t in Papirus Papirus-Dark; do gtk-update-icon-cache -qf "$ICONS/$t" 2>/dev/null || true; done
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+    # app icons: mochicons, which falls back to the Papirus-Dark above
+    if git clone -q --depth 1 https://github.com/BrisaTielly/mochicons "$TMP/mochicons"; then
+        "$TMP/mochicons/install.sh" >/dev/null && ok "mochicons on" || warn "mochicons failed; Papirus-Dark stays"
+    fi
     ok "icons applied"
 }
 

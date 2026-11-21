@@ -30,7 +30,7 @@
 | **Traffic lights** | Pastel minimize, maximize and close dots on the right, in GTK3, GTK4, Chrome, VS Code and Slack. |
 | **Mocha everywhere** | Windows, top bar, menus, terminal, editor, Spotify, Obsidian, Telegram and lazygit share one palette. |
 | **A calmer top bar** | Solid `surface0` instead of whatever color the wallpaper has, a JetBrains Mono clock, stock status icons. |
-| **Mauve folders** | The full Papirus icon theme with Catppuccin Mocha folders. |
+| **Mochicons** | 88 app icons drawn for this desktop, pastel glyphs on dark squares, over Papirus with mauve folders. |
 | **A terminal that purrs** | WezTerm + tmux in Mocha with its own slim traffic-light bar, and fastfetch with a cat made of characters. |
 | **A tidy app grid** | Apps sorted into folders (AI, Dev, Internet, Office, Media, Games, System, Utilities) and a short dock. |
 | **Round everywhere** | Every window gets four rounded corners, even the ones Chrome and Electron leave square at the bottom. |
@@ -68,7 +68,7 @@ Run only some steps:
 | `fonts` | JetBrains Mono Nerd Font. |
 | `cursor` | Bibata Modern Ice. |
 | `theme` | Window and top bar theme, traffic lights, buttons on the right. |
-| `icons` | Papirus-Dark with mauve folders; stock icons in the top bar. |
+| `icons` | [mochicons](https://github.com/BrisaTielly/mochicons) app icons over Papirus-Dark with mauve folders; stock icons in the top bar. |
 | `extensions` | User Themes, Blur my Shell, Clipboard Indicator, Caffeine, Rounded Window Corners. |
 | `wallpaper` | Sets *waves*, a Mocha wallpaper drawn by `scripts/make-wallpaper.py`. |
 | `terminal` | WezTerm, tmux, fastfetch, Neovim, lazygit and fzf. |
