@@ -164,7 +164,7 @@ EOF
         local S="gsettings --schemadir $sl set org.gnome.shell.extensions.search-light"
         # GNOME uses Super+Space to switch keyboard layouts; leave it only on the keyboard key
         gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['XF86Keyboard']"
-        $S shortcut-search "['<Super>space']"; $S blur-background false; $S border-radius 20.0; $S border-thickness 1
+        $S shortcut-search "['<Super>space']"; $S blur-background false; $S border-radius 5.0  # index: 0 16 18 20 22 24 28 32 px; $S border-thickness 1
         $S background-color '(0.118, 0.118, 0.180, 0.97)'; $S border-color '(0.796, 0.651, 0.969, 0.45)'
         $S text-color '(0.804, 0.839, 0.957, 1.0)'; $S entry-text-color '(0.804, 0.839, 0.957, 1.0)'
     fi
